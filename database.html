@@ -1,0 +1,299 @@
+mysql> create database demo;
+ERROR 1007 (HY000): Can't create database 'demo'; database exists
+mysql> create database student;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use student;
+Database changed
+mysql> create table student(id int,name varchar(30));
+Query OK, 0 rows affected (1.10 sec)
+
+mysql> insert into student (1,'nafi');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'nafi')' at line 1
+mysql> insert into student values(1,'nafiya');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(2,'ajisa');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(3,'anaga');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(4,'anu');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(5,'hari');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(6,'rayu');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(7,'manu');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(8,'ajisa');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into values student(9,'fida');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'values student(9,'fida')' at line 1
+mysql> insert into student values(9,'fida');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(10,'raji');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student;
++------+--------+
+| id   | name   |
++------+--------+
+|    1 | nafiya |
+|    2 | ajisa  |
+|    3 | anaga  |
+|    4 | anu    |
+|    5 | hari   |
+|    6 | rayu   |
+|    7 | manu   |
+|    8 | ajisa  |
+|    9 | fida   |
+|   10 | raji   |
++------+--------+
+10 rows in set (0.00 sec)
+
+mysql> alter table student add age int;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table student add department varchar(10);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++------+--------+------+------------+
+| id   | name   | age  | department |
++------+--------+------+------------+
+|    1 | nafiya | NULL | NULL       |
+|    2 | ajisa  | NULL | NULL       |
+|    3 | anaga  | NULL | NULL       |
+|    4 | anu    | NULL | NULL       |
+|    5 | hari   | NULL | NULL       |
+|    6 | rayu   | NULL | NULL       |
+|    7 | manu   | NULL | NULL       |
+|    8 | ajisa  | NULL | NULL       |
+|    9 | fida   | NULL | NULL       |
+|   10 | raji   | NULL | NULL       |
++------+--------+------+------------+
+10 rows in set (0.00 sec)
+
+mysql> update student set age='20',department='mca' where id=1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++------+--------+------+------------+
+| id   | name   | age  | department |
++------+--------+------+------------+
+|    1 | nafiya |   20 | mca        |
+|    2 | ajisa  | NULL | NULL       |
+|    3 | anaga  | NULL | NULL       |
+|    4 | anu    | NULL | NULL       |
+|    5 | hari   | NULL | NULL       |
+|    6 | rayu   | NULL | NULL       |
+|    7 | manu   | NULL | NULL       |
+|    8 | ajisa  | NULL | NULL       |
+|    9 | fida   | NULL | NULL       |
+|   10 | raji   | NULL | NULL       |
++------+--------+------+------------+
+10 rows in set (0.00 sec)
+
+mysql> update student set age='22',department='btech' where id=2;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student set age='21',department='bca' where id=3;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student set age='24',department='bcom' where id=4;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student set age='25',department='mcom' where id=5;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student set age='26',department='bsc' where id=6;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student set age='27',department='bba' where id=7;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student set age='28',department='civil' where id=8;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++------+--------+------+------------+
+| id   | name   | age  | department |
++------+--------+------+------------+
+|    1 | nafiya |   20 | mca        |
+|    2 | ajisa  |   22 | btech      |
+|    3 | anaga  |   21 | bca        |
+|    4 | anu    |   24 | bcom       |
+|    5 | hari   |   25 | mcom       |
+|    6 | rayu   |   26 | bsc        |
+|    7 | manu   |   27 | bba        |
+|    8 | ajisa  |   28 | civil      |
+|    9 | fida   | NULL | NULL       |
+|   10 | raji   | NULL | NULL       |
++------+--------+------+------------+
+10 rows in set (0.00 sec)
+
+mysql> update student set age='23',department='mba' where id=9;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update student set age='27',department='bca' where id=10;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student where id=10;
++------+------+------+------------+
+| id   | name | age  | department |
++------+------+------+------------+
+|   10 | raji |   27 | bca        |
++------+------+------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where id>5;
++------+-------+------+------------+
+| id   | name  | age  | department |
++------+-------+------+------------+
+|    6 | rayu  |   26 | bsc        |
+|    7 | manu  |   27 | bba        |
+|    8 | ajisa |   28 | civil      |
+|    9 | fida  |   23 | mba        |
+|   10 | raji  |   27 | bca        |
++------+-------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student where id>=5;
++------+-------+------+------------+
+| id   | name  | age  | department |
++------+-------+------+------------+
+|    5 | hari  |   25 | mcom       |
+|    6 | rayu  |   26 | bsc        |
+|    7 | manu  |   27 | bba        |
+|    8 | ajisa |   28 | civil      |
+|    9 | fida  |   23 | mba        |
+|   10 | raji  |   27 | bca        |
++------+-------+------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student where id=5;
++------+------+------+------------+
+| id   | name | age  | department |
++------+------+------+------------+
+|    5 | hari |   25 | mcom       |
++------+------+------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where id<=5;
++------+--------+------+------------+
+| id   | name   | age  | department |
++------+--------+------+------------+
+|    1 | nafiya |   20 | mca        |
+|    2 | ajisa  |   22 | btech      |
+|    3 | anaga  |   21 | bca        |
+|    4 | anu    |   24 | bcom       |
+|    5 | hari   |   25 | mcom       |
++------+--------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student where id<5;
++------+--------+------+------------+
+| id   | name   | age  | department |
++------+--------+------+------------+
+|    1 | nafiya |   20 | mca        |
+|    2 | ajisa  |   22 | btech      |
+|    3 | anaga  |   21 | bca        |
+|    4 | anu    |   24 | bcom       |
++------+--------+------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from student where id=7 and id=10;
+Empty set (0.00 sec)
+
+mysql> select * from student where id between 7 and 10;
++------+-------+------+------------+
+| id   | name  | age  | department |
++------+-------+------+------------+
+|    7 | manu  |   27 | bba        |
+|    8 | ajisa |   28 | civil      |
+|    9 | fida  |   23 | mba        |
+|   10 | raji  |   27 | bca        |
++------+-------+------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select name from student where name like 'n%';
++--------+
+| name   |
++--------+
+| nafiya |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select name from student where name like 'b%';
+Empty set (0.00 sec)
+
+mysql> select name from student where name like 'a%';
++-------+
+| name  |
++-------+
+| ajisa |
+| anaga |
+| anu   |
+| ajisa |
++-------+
+4 rows in set (0.00 sec)
+
+mysql> select name from student where name like '_a%';
++--------+
+| name   |
++--------+
+| nafiya |
+| hari   |
+| rayu   |
+| manu   |
+| raji   |
++--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student where id in(10,7);
++------+------+------+------------+
+| id   | name | age  | department |
++------+------+------+------------+
+|    7 | manu |   27 | bba        |
+|   10 | raji |   27 | bca        |
++------+------+------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select name from student where name like '%a%';
++--------+
+| name   |
++--------+
+| nafiya |
+| ajisa  |
+| anaga  |
+| anu    |
+| hari   |
+| rayu   |
+| manu   |
+| ajisa  |
+| fida   |
+| raji   |
++--------+
+10 rows in set (0.00 sec)
+
+mysql>
