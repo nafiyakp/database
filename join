@@ -1,0 +1,280 @@
+mysql> select * from employee;
+ERROR 1046 (3D000): No database selected
+mysql> use samples;
+Database changed
+mysql> select * from employee;
++------+-----------+-------------+----------------+------------------+----------+
+| SSN  | name      | department  | project_name   | project_location | salary   |
++------+-----------+-------------+----------------+------------------+----------+
+|  101 | hari      | HR          | devoloping     | kannur           | 80000.00 |
+|  102 | meenakshi | marketing   | solar system   | kolkatta         | 56000.00 |
+|  103 | athul     | finance     | vehicle system | kottayam         | 46000.00 |
+|  104 | nafiya    | devolopment | planar system  | calicut          | 88000.00 |
+|  105 | najiya    | marketing   | advertisement  | tamil nadu       | 47000.00 |
+|  106 | raniya    | finance     | sales          | kashmir          | 90000.00 |
+|  107 | afiya     | devolopment | system control | palakad          | 55000.00 |
+|  108 | haniya    | finance     | AI             | munar            | 40000.00 |
+|  109 | rafiya    | marketing   | banking        | kottayam         | 59000.00 |
+|  200 | rahiya    | devolopment | solar system   | kottayam         | 77000.00 |
++------+-----------+-------------+----------------+------------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from department;
++------+-----------+---------------+
+| DID  | dept_name | dept_location |
++------+-----------+---------------+
+| 101A | marketing | kotttayam     |
+| 101B | FINANCE   | kANNUR        |
+| 101C | marketing | kollam        |
+| 101D | finance   | palakad       |
+| 101E | marketing | munar         |
+| 101F | finance   | kashmir       |
+| 101G | marketing | munar         |
+| 101I | finance   | calicut       |
+| 101J | finance   | tamil nadu    |
++------+-----------+---------------+
+9 rows in set (0.00 sec)
+
+mysql> select * from ORDERS;
++---------+-------------+------------+--------------+------------+
+| orderid | ordername   | costumerid | costumername | oredrdate  |
++---------+-------------+------------+--------------+------------+
+| 101A    | moisturiser | 11A        | neha         | 2023-12-01 |
+| 101B    | Bags        | 11B        | nafi         | 2023-12-02 |
+| 101C    | Bottles     | 11C        | naji         | 2024-12-02 |
+| 101D    | books       | 11D        | nithya       | 2023-12-23 |
++---------+-------------+------------+--------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into ORDERS values('101E','bottle','11E','niba','2024/3/12');
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+mysql> insert into ORDERS values('101F','Clock','11F','niya','2024/13/2');
+ERROR 1292 (22007): Incorrect date value: '2024/13/2' for column 'oredrdate' at row 1
+mysql> insert into ORDERS values('101F','Clock','11F','niya','2024/2/22');
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+mysql> insert into ORDERS values('101G','Calculator','11G','niha','2022/6/2');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> insert into ORDERS values('101H','Camera','11H','Hariha','2022/6/6');
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+mysql> insert into ORDERS values('101I','Camera','11I','Nirmala','2021/6/6');
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+mysql> insert into ORDERS values('101J','ring','11J','Noyal','2021/4/2');
+Query OK, 1 row affected, 1 warning (0.01 sec)
+
+mysql> select * from ORDERS;
++---------+-------------+------------+--------------+------------+
+| orderid | ordername   | costumerid | costumername | oredrdate  |
++---------+-------------+------------+--------------+------------+
+| 101A    | moisturiser | 11A        | neha         | 2023-12-01 |
+| 101B    | Bags        | 11B        | nafi         | 2023-12-02 |
+| 101C    | Bottles     | 11C        | naji         | 2024-12-02 |
+| 101D    | books       | 11D        | nithya       | 2023-12-23 |
+| 101E    | bottle      | 11E        | niba         | 2024-03-12 |
+| 101F    | Clock       | 11F        | niya         | 2024-02-22 |
+| 101G    | Calculator  | 11G        | niha         | 2022-06-02 |
+| 101H    | Camera      | 11H        | Hariha       | 2022-06-06 |
+| 101I    | Camera      | 11I        | Nirmala      | 2021-06-06 |
+| 101J    | ring        | 11J        | Noyal        | 2021-04-02 |
++---------+-------------+------------+--------------+------------+
+10 rows in set (0.00 sec)
+
+mysql> create table PRIDUCTS(PRODUCTID varchar(10),PRODUCTNAME varchar(30),ORDERID VARCHAR(10));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql>  insert into PRIDECTS values("111A","MOISTURIZER","101A","HADIYA","2023-05-05");
+ERROR 1146 (42S02): Table 'samples.pridects' doesn't exist
+mysql>  insert into PRODECTS values("111A","MOISTURIZER","101A","HADIYA","2023-05-05");
+ERROR 1146 (42S02): Table 'samples.prodects' doesn't exist
+mysql> create table PRODUCTS(PRODUCTID varchar(10),PRODUCTNAME varchar(30),ORDERID VARCHAR(10));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql>  insert into PRODECTS values("111A","MOISTURIZER","101A","HADIYA","2023-05-05");
+ERROR 1146 (42S02): Table 'samples.prodects' doesn't exist
+mysql> create table PRODUCTS(PRODUCTID varchar(10),PRODUCTNAME varchar(30),ORDERID VARCHAR(10));
+ERROR 1050 (42S01): Table 'products' already exists
+mysql> insert into PRIDECTS values("ABC1","POWDER","101A");
+ERROR 1146 (42S02): Table 'samples.pridects' doesn't exist
+mysql> insert into PRODECTS values("ABC1","POWDER","101A");
+ERROR 1146 (42S02): Table 'samples.prodects' doesn't exist
+mysql> insert into PRODECTS values("ABC1","POWDER","101A");
+ERROR 1146 (42S02): Table 'samples.prodects' doesn't exist
+mysql> create table PRODUCTS(PRODUCTID varchar(10),PRODUCTNAME varchar(30),ORDERID VARCHAR(10));
+ERROR 1050 (42S01): Table 'products' already exists
+mysql> drop table products;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> use samples;
+Database changed
+mysql> create table products(p_id varchar(10),p_name varchar(10),order_id varchar(10));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into products values("ABC1","POWDER","101A");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into products values("ABC1","MOISTURIZER","101B");
+ERROR 1406 (22001): Data too long for column 'p_name' at row 1
+mysql> insert into products values("ABC1","BAG","101B");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into products values("ABC3","BOOK","101C");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into products values("ABC4","CLOCK","101D");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into products values("ABC5","WATCH","101E");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> update products set p_id='ABC2' where order_id='101B';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from products;
++------+--------+----------+
+| p_id | p_name | order_id |
++------+--------+----------+
+| ABC1 | POWDER | 101A     |
+| ABC2 | BAG    | 101B     |
+| ABC3 | BOOK   | 101C     |
+| ABC4 | CLOCK  | 101D     |
+| ABC5 | WATCH  | 101E     |
++------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT ORDERS.orderid,products.p_id FROM ORDERS JOIN products  ON ORDERS.orderid=products.order_id;
++---------+------+
+| orderid | p_id |
++---------+------+
+| 101A    | ABC1 |
+| 101B    | ABC2 |
+| 101C    | ABC3 |
+| 101D    | ABC4 |
+| 101E    | ABC5 |
++---------+------+
+5 rows in set (0.03 sec)
+
+mysql> SELECT ORDERS.orderid,products.P_name FROM ORDERS JOIN products ON ORDERS.orderid=PRODUCTS.order_id;
++---------+--------+
+| orderid | P_name |
++---------+--------+
+| 101A    | POWDER |
+| 101B    | BAG    |
+| 101C    | BOOK   |
+| 101D    | CLOCK  |
+| 101E    | WATCH  |
++---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT ORDERS.orderid,PRODUCTS.p_name  FROM ORDERS INNER JOIN products ON ORDERS.orderid=products.order_id;
++---------+--------+
+| orderid | p_name |
++---------+--------+
+| 101A    | POWDER |
+| 101B    | BAG    |
+| 101C    | BOOK   |
+| 101D    | CLOCK  |
+| 101E    | WATCH  |
++---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT ORDERS.orderid,PRODUCTS.P_name FROM ORDERS INNER JOIN PRODUCTS ON ORDERS.orderid=PRODUCTS.order_id;
++---------+--------+
+| orderid | P_name |
++---------+--------+
+| 101A    | POWDER |
+| 101B    | BAG    |
+| 101C    | BOOK   |
+| 101D    | CLOCK  |
+| 101E    | WATCH  |
++---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT ORDERS.orderid,ORDERS.ordername,PRODUCTS.P_name FROM ORDERS INNER JOIN PRODUCTS ON ORDERS.orderid=PRODUCTS.order_id;
++---------+-------------+--------+
+| orderid | ordername   | P_name |
++---------+-------------+--------+
+| 101A    | moisturiser | POWDER |
+| 101B    | Bags        | BAG    |
+| 101C    | Bottles     | BOOK   |
+| 101D    | books       | CLOCK  |
+| 101E    | bottle      | WATCH  |
++---------+-------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT ORDERS.orderid,ORDERS.ordername,PRODUCTS.p_name FROM ORDERS INNER JOIN PRODUCTS ON ORDERS.orderid>PRODUCTS.order_id;
++---------+------------+--------+
+| orderid | ordername  | p_name |
++---------+------------+--------+
+| 101B    | Bags       | POWDER |
+| 101C    | Bottles    | BAG    |
+| 101C    | Bottles    | POWDER |
+| 101D    | books      | BOOK   |
+| 101D    | books      | BAG    |
+| 101D    | books      | POWDER |
+| 101E    | bottle     | CLOCK  |
+| 101E    | bottle     | BOOK   |
+| 101E    | bottle     | BAG    |
+| 101E    | bottle     | POWDER |
+| 101F    | Clock      | WATCH  |
+| 101F    | Clock      | CLOCK  |
+| 101F    | Clock      | BOOK   |
+| 101F    | Clock      | BAG    |
+| 101F    | Clock      | POWDER |
+| 101G    | Calculator | WATCH  |
+| 101G    | Calculator | CLOCK  |
+| 101G    | Calculator | BOOK   |
+| 101G    | Calculator | BAG    |
+| 101G    | Calculator | POWDER |
+| 101H    | Camera     | WATCH  |
+| 101H    | Camera     | CLOCK  |
+| 101H    | Camera     | BOOK   |
+| 101H    | Camera     | BAG    |
+| 101H    | Camera     | POWDER |
+| 101I    | Camera     | WATCH  |
+| 101I    | Camera     | CLOCK  |
+| 101I    | Camera     | BOOK   |
+| 101I    | Camera     | BAG    |
+| 101I    | Camera     | POWDER |
+| 101J    | ring       | WATCH  |
+| 101J    | ring       | CLOCK  |
+| 101J    | ring       | BOOK   |
+| 101J    | ring       | BAG    |
+| 101J    | ring       | POWDER |
++---------+------------+--------+
+35 rows in set (0.03 sec)
+
+mysql> SELECT ORDERS.orderid,ORDERS.ordername,PRODUCTS.p_name FROM ORDERS left JOIN PRODUCTS ON ORDERS.orderid=PRODUCTS.order_id;
++---------+-------------+--------+
+| orderid | ordername   | p_name |
++---------+-------------+--------+
+| 101A    | moisturiser | POWDER |
+| 101B    | Bags        | BAG    |
+| 101C    | Bottles     | BOOK   |
+| 101D    | books       | CLOCK  |
+| 101E    | bottle      | WATCH  |
+| 101F    | Clock       | NULL   |
+| 101G    | Calculator  | NULL   |
+| 101H    | Camera      | NULL   |
+| 101I    | Camera      | NULL   |
+| 101J    | ring        | NULL   |
++---------+-------------+--------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT ORDERS.orderid,ORDERS.ordername,PRODUCTS.p_name FROM ORDERS right JOIN PRODUCTS ON ORDERS.orderid=PRODUCTS.order_id;
++---------+-------------+--------+
+| orderid | ordername   | p_name |
++---------+-------------+--------+
+| 101A    | moisturiser | POWDER |
+| 101B    | Bags        | BAG    |
+| 101C    | Bottles     | BOOK   |
+| 101D    | books       | CLOCK  |
+| 101E    | bottle      | WATCH  |
++---------+-------------+--------+
+5 rows in set (0.00 sec)
+
+mysql>
