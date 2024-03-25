@@ -1,0 +1,146 @@
+mysql> use samples;
+Database changed
+mysql> create table employee(SSN int,name varchar(10),department varchar(20),project_name varchar(20),project_location varchar(20),salary float(10,2));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> insert into employee values('11A','hari','HR','devoloping','kannur','80000');
+ERROR 1265 (01000): Data truncated for column 'SSN' at row 1
+mysql> insert into employee values('101','hari','HR','devoloping','kannur','80000');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values('102','meenakshi','marketing','solar system','kolkatta','56000');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into employee values('103',athul','finance','vehicle system','kottayam','46000');
+    '> insert into employee values('103',athul','finance','vehicle system','kottayam','46000');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '','finance','vehicle system','kottayam','46000');
+insert into employee values('1' at line 1
+mysql> insert into employee values('103','athul','finance','vehicle system','kottayam','46000');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values('104','nafiya','devolopment','planar system','calicut','88000');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into employee values('105','najiya','marketing','advertisement','tamil nadu','47000');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values('106','raniya','finance','sales','kashmir','90000');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values('107','afiya','devolopment','system control','palakad','55000');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into employee values('108','haniya','finance','artificial inteligence','munar','40000');
+ERROR 1406 (22001): Data too long for column 'project_name' at row 1
+mysql> insert into employee values('108','haniya','finance','AI','munar','40000');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into employee values('109','rafiya','marketing','banking','kottayam','59000');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into employee values('200','rahiya','devolopment','solar system','kottayam','77000');
+Query OK, 1 row affected (0.04 sec)
+
+mysql>  select * from employee;
++------+-----------+-------------+----------------+------------------+----------+
+| SSN  | name      | department  | project_name   | project_location | salary   |
++------+-----------+-------------+----------------+------------------+----------+
+|  101 | hari      | HR          | devoloping     | kannur           | 80000.00 |
+|  102 | meenakshi | marketing   | solar system   | kolkatta         | 56000.00 |
+|  103 | athul     | finance     | vehicle system | kottayam         | 46000.00 |
+|  104 | nafiya    | devolopment | planar system  | calicut          | 88000.00 |
+|  105 | najiya    | marketing   | advertisement  | tamil nadu       | 47000.00 |
+|  106 | raniya    | finance     | sales          | kashmir          | 90000.00 |
+|  107 | afiya     | devolopment | system control | palakad          | 55000.00 |
+|  108 | haniya    | finance     | AI             | munar            | 40000.00 |
+|  109 | rafiya    | marketing   | banking        | kottayam         | 59000.00 |
+|  200 | rahiya    | devolopment | solar system   | kottayam         | 77000.00 |
++------+-----------+-------------+----------------+------------------+----------+
+10 rows in set (0.03 sec)
+
+mysql> create table department(DID varchar(10),dept_name varchar(20),dept_location varchar(30));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into department values('101A','marketing','kotttayam');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into department values('101B','FINANCE','kANNUR');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into department values('101C','marketing','kollam');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into department values('101D','finance','palakad');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into department values('101E','marketing','munar');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into department values('101F','finance','kashmir');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into department values('101G','marketing','munar');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into department values('101I','finance','calicut');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into department values('101J','finance','tamil nadu');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from department;
++------+-----------+---------------+
+| DID  | dept_name | dept_location |
++------+-----------+---------------+
+| 101A | marketing | kotttayam     |
+| 101B | FINANCE   | kANNUR        |
+| 101C | marketing | kollam        |
+| 101D | finance   | palakad       |
+| 101E | marketing | munar         |
+| 101F | finance   | kashmir       |
+| 101G | marketing | munar         |
+| 101I | finance   | calicut       |
+| 101J | finance   | tamil nadu    |
++------+-----------+---------------+
+9 rows in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| employee           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sample             |
+| samples            |
+| student            |
+| sys                |
++--------------------+
+8 rows in set (0.04 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_samples |
++-------------------+
+| department        |
+| employee          |
++-------------------+
+2 rows in set (0.01 sec)
+
+mysql> reate table ORDERS(orderid varchar(10),ordername varchar(30),costumerid varchar(10),costumername varchar(30),oredrdate date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'reate table ORDERS(orderid varchar(10),ordername varchar(30),costumerid varchar(' at line 1
+mysql> create table ORDERS(orderid varchar(10),ordername varchar(30),costumerid varchar(10),costumername varchar(30),oredrdate date);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql>  insert into ORDERS  values("101A",'moisturiser',"11A","neha",'2023/12/1');
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+mysql>  insert into ORDERS  values("101B",'Bags',"11B","nafi",'2023/12/2');
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+mysql>  insert into ORDERS  values("101C",'Bottles',"11C","naji",'2024/12/2');
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+mysql>  insert into ORDERS  values("101D",'books',"11D","nithya",'2023/12/23');
+Query OK, 1 row affected, 1 warning (0.01 sec)
