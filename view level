@@ -1,0 +1,105 @@
+mysql> use samples;
+Database changed
+mysql> select * from embloyee;
++------+---------+------------+------------------+------------------+-----------+
+| SSN  | name    | department | project_name     | project_location | salary    |
++------+---------+------------+------------------+------------------+-----------+
+| 111A | najiya  | sales      | vechicle control | kochi            |  70000.00 |
+| 111C | ajisa   | HR         | devolopment      | banglore         | 670000.00 |
+| 111D | akash   | finance    | AI               | kollam           |  70000.00 |
+| 111E | hari    | research   | huamn welfare    | kozhikode        | 480000.00 |
+| 111f | fida    | finance    | medical system   | delhi            |  70000.00 |
+| 111g | sareena | finance    | system control   | hyderabad        |  30000.00 |
+| 111k | hariz   | sales      | devolopment      | chennai          |  70000.00 |
+| 111L | nafiya  | marketing  | solar ststem     | Delhi            |  90000.00 |
+| 111o | fazin   | finance    | devolopment      | calicut          |  50000.00 |
+| 111z | meera   | trading    | auto atlas       | kannur           |  60000.00 |
++------+---------+------------+------------------+------------------+-----------+
+10 rows in set (0.16 sec)
+
+mysql> elect * from products;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'elect * from products' at line 1
+mysql> select * from products;
+ERROR 1146 (42S02): Table 'samples.products' doesn't exist
+mysql> select * from product;
++------------+--------------+----------+
+| product_id | product_name | order_id |
++------------+--------------+----------+
+| 111        | watch        | 101      |
+| 112        | ring         | 102      |
+| 113        | cloths       | 103      |
+| 114        | clock        | 104      |
+| 115        | calculator   | 105      |
+| 116        | earings      | 106      |
++------------+--------------+----------+
+6 rows in set (0.05 sec)
+
+mysql> select * from orders;
++----------+-------------+---------------+------------+
+| order_id | customer_id | customer_name | order_date |
++----------+-------------+---------------+------------+
+| 101      | 11A         | neha          | 2023-12-01 |
+| 102      | 11B         | najisa        | 2024-11-20 |
+| 103      | 11C         | hari          | 2022-11-20 |
+| 104      | 11D         | hariz         | 2021-07-18 |
+| 105      | 11E         | ajisa         | 2020-04-16 |
+| 106      | 11F         | anu           | 2020-05-03 |
++----------+-------------+---------------+------------+
+6 rows in set (0.09 sec)
+
+mysql> create table PRIDUCTS(PRODUCTID varchar(10),PRODUCTNAME varchar(30),ORDERID VARCHAR(10));
+Query OK, 0 rows affected (0.42 sec)
+
+mysql> insert into PRIDECTS values("111A","MOISTURIZER","101A","HADIYA","2023-05-05");
+ERROR 1146 (42S02): Table 'samples.pridects' doesn't exist
+mysql> insert into PRIDUCTS values("111A","MOISTURIZER","101A","HADIYA","2023-05-05");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> select * from orders natural join product;
++----------+-------------+---------------+------------+------------+--------------+
+| order_id | customer_id | customer_name | order_date | product_id | product_name |
++----------+-------------+---------------+------------+------------+--------------+
+| 101      | 11A         | neha          | 2023-12-01 | 111        | watch        |
+| 102      | 11B         | najisa        | 2024-11-20 | 112        | ring         |
+| 103      | 11C         | hari          | 2022-11-20 | 113        | cloths       |
+| 104      | 11D         | hariz         | 2021-07-18 | 114        | clock        |
+| 105      | 11E         | ajisa         | 2020-04-16 | 115        | calculator   |
+| 106      | 11F         | anu           | 2020-05-03 | 116        | earings      |
++----------+-------------+---------------+------------+------------+--------------+
+6 rows in set (0.00 sec)
+
+mysql> create view ordersview as select order_id,customer_id,customer_name from orders;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from ordersview;
++----------+-------------+---------------+
+| order_id | customer_id | customer_name |
++----------+-------------+---------------+
+| 101      | 11A         | neha          |
+| 102      | 11B         | najisa        |
+| 103      | 11C         | hari          |
+| 104      | 11D         | hariz         |
+| 105      | 11E         | ajisa         |
+| 106      | 11F         | anu           |
++----------+-------------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> create view ordersview as select order_id,customer_id  from orders;
+ERROR 1050 (42S01): Table 'ordersview' already exists
+mysql> create view orderview as select order_id  from orders;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from orderview;
++----------+
+| order_id |
++----------+
+| 101      |
+| 102      |
+| 103      |
+| 104      |
+| 105      |
+| 106      |
++----------+
+6 rows in set (0.00 sec)
+
+mysql>
+
