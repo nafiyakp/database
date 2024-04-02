@@ -1,0 +1,128 @@
+mysql> use samples;
+Database changed
+mysql> select * from orders;
++----------+-------------+---------------+------------+
+| order_id | customer_id | customer_name | order_date |
++----------+-------------+---------------+------------+
+| 101      | 11A         | neha          | 2023-12-01 |
+| 102      | 11B         | najisa        | 2024-11-20 |
+| 103      | 11C         | hari          | 2022-11-20 |
+| 104      | 11D         | hariz         | 2021-07-18 |
+| 105      | 11E         | ajisa         | 2020-04-16 |
+| 106      | 11F         | anu           | 2020-05-03 |
++----------+-------------+---------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from prroduct;
+ERROR 1146 (42S02): Table 'samples.prroduct' doesn't exist
+mysql> select * from product;
++------------+--------------+----------+
+| product_id | product_name | order_id |
++------------+--------------+----------+
+| 111        | watch        | 101      |
+| 112        | ring         | 102      |
+| 113        | cloths       | 103      |
+| 114        | clock        | 104      |
+| 115        | calculator   | 105      |
+| 116        | earings      | 106      |
++------------+--------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from embloyee;
++------+---------+------------+------------------+------------------+-----------+
+| SSN  | name    | department | project_name     | project_location | salary    |
++------+---------+------------+------------------+------------------+-----------+
+| 111A | najiya  | sales      | vechicle control | kochi            |  70000.00 |
+| 111C | ajisa   | HR         | devolopment      | banglore         | 670000.00 |
+| 111D | akash   | finance    | AI               | kollam           |  70000.00 |
+| 111E | hari    | research   | huamn welfare    | kozhikode        | 480000.00 |
+| 111f | fida    | finance    | medical system   | delhi            |  70000.00 |
+| 111g | sareena | finance    | system control   | hyderabad        |  30000.00 |
+| 111k | hariz   | sales      | devolopment      | chennai          |  70000.00 |
+| 111L | nafiya  | marketing  | solar ststem     | Delhi            |  90000.00 |
+| 111o | fazin   | finance    | devolopment      | calicut          |  50000.00 |
+| 111z | meera   | trading    | auto atlas       | kannur           |  60000.00 |
++------+---------+------------+------------------+------------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> desc oders;
+ERROR 1146 (42S02): Table 'samples.oders' doesn't exist
+mysql> desc orders;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| order_id      | varchar(10) | NO   | PRI | NULL    |       |
+| customer_id   | varchar(10) | YES  |     | NULL    |       |
+| customer_name | varchar(20) | YES  |     | NULL    |       |
+| order_date    | date        | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc department;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| SSN           | varchar(10) | NO   | PRI | NULL    |       |
+| dept_name     | varchar(20) | YES  |     | NULL    |       |
+| dept_location | varchar(30) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> desc product;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| product_id   | varchar(10) | YES  |     | NULL    |       |
+| product_name | varchar(10) | YES  |     | NULL    |       |
+| order_id     | varchar(10) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table product add primary key(product_id);
+Query OK, 0 rows affected (0.59 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc product;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| product_id   | varchar(10) | NO   | PRI | NULL    |       |
+| product_name | varchar(10) | YES  |     | NULL    |       |
+| order_id     | varchar(10) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table orders add primary key(order_id);
+ERROR 1068 (42000): Multiple primary key defined
+mysql> alter table product add foreign key(order_id) references orders(order_id);
+Query OK, 6 rows affected (0.82 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> desc product;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| product_id   | varchar(10) | NO   | PRI | NULL    |       |
+| product_name | varchar(10) | YES  |     | NULL    |       |
+| order_id     | varchar(10) | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select orders.order_id ,product.product_id,product.product_name from orders join products where order.order_id=product.order_id;
+ERROR 1146 (42S02): Table 'samples.products' doesn't exist
+mysql> select orders.order_id ,product.product_id,product.product_name from orders join product where order.order_id=product.order_id;
+ERROR 1054 (42S22): Unknown column 'order.order_id' in 'where clause'
+mysql> select orders.order_id ,product.product_id,product.product_name from orders join product where orders.order_id=product.order_id;
++----------+------------+--------------+
+| order_id | product_id | product_name |
++----------+------------+--------------+
+| 101      | 111        | watch        |
+| 102      | 112        | ring         |
+| 103      | 113        | cloths       |
+| 104      | 114        | clock        |
+| 105      | 115        | calculator   |
+| 106      | 116        | earings      |
++----------+------------+--------------+
+6 rows in set (0.00 sec)
+
+mysql>
