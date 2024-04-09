@@ -1,0 +1,41 @@
+mysql> use samples;
+Database changed
+mysql> select * from orders;
++----------+-------------+---------------+------------+
+| order_id | customer_id | customer_name | order_date |
++----------+-------------+---------------+------------+
+| 101      | 11A         | neha          | 2023-12-01 |
+| 102      | 11B         | najisa        | 2024-11-20 |
+| 103      | 11C         | hari          | 2022-11-20 |
+| 104      | 11D         | hariz         | 2021-07-18 |
+| 105      | 11E         | ajisa         | 2020-04-16 |
+| 106      | 11F         | anu           | 2020-05-03 |
++----------+-------------+---------------+------------+
+6 rows in set (0.06 sec)
+
+mysql> select * from products;
+ERROR 1146 (42S02): Table 'samples.products' doesn't exist
+mysql> select * from product;
++------------+--------------+----------+
+| product_id | product_name | order_id |
++------------+--------------+----------+
+| 111        | watch        | 101      |
+| 112        | ring         | 102      |
+| 113        | cloths       | 103      |
+| 114        | clock        | 104      |
+| 115        | calculator   | 105      |
+| 116        | earings      | 106      |
++------------+--------------+----------+
+6 rows in set (0.02 sec)
+mysql> select order_id,customer_name from orders o where exists( select * from product p  where p.order_id=o.order_id);
++----------+---------------+
+| order_id | customer_name |
++----------+---------------+
+| 101      | neha          |
+| 102      | najisa        |
+| 103      | hari          |
+| 104      | hariz         |
+| 105      | ajisa         |
+| 106      | anu           |
++----------+---------------+
+6 rows in set (0.00 sec)
