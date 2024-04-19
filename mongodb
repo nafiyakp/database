@@ -1,0 +1,186 @@
+> show dbs
+admin     0.000GB
+config    0.000GB
+local     0.000GB
+nafiyakp  0.000GB
+> use nafiyakp
+switched to db nafiyakp
+> db.createCollection('samples1')
+{ "ok" : 1 }
+> db.samples1.insert({"name":"nafiya"})
+WriteResult({ "nInserted" : 1 })
+> db.samples1.insert({"name":"ajisa"})
+WriteResult({ "nInserted" : 1 })
+> db.samples1.insert({"name":"fida"})
+WriteResult({ "nInserted" : 1 })
+> db.samples1.insert({"name":"lubna"})
+WriteResult({ "nInserted" : 1 })
+> db.samples1.insert({"name":"anagha"})
+WriteResult({ "nInserted" : 1 })
+> db.samples1.insert({"name":"najiya"})
+WriteResult({ "nInserted" : 1 })
+> db.samples1.insert({"name":"niba"})
+WriteResult({ "nInserted" : 1 })
+> db.samples1.insert({"name":"kavya"})
+WriteResult({ "nInserted" : 1 })
+> db.samples1.insert({"name":"hari"})
+WriteResult({ "nInserted" : 1 })
+> db.samples1.insert({"name":"hena"})
+WriteResult({ "nInserted" : 1 })
+> db.samples1.insert("name":"renna","age":20})
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:25
+> db.samples1.insert({"name":"renna","age":20})
+WriteResult({ "nInserted" : 1 })
+> db.samples1.insert({"name":"raha","age":22})
+WriteResult({ "nInserted" : 1 })
+> db.samples1.insert({"name":"anu","age":23})
+WriteResult({ "nInserted" : 1 })
+> db.samples1.insert({"name":"hari","age":27})
+WriteResult({ "nInserted" : 1 })
+> db.samples1.insert({"name":"gopi","age":26})
+WriteResult({ "nInserted" : 1 })
+> db.samples1.find
+function(query, fields, limit, skip, batchSize, options) {
+    var cursor = new DBQuery(this._mongo,
+                             this._db,
+                             this,
+                             this._fullName,
+                             this._massageObject(query),
+                             fields,
+                             limit,
+                             skip,
+                             batchSize,
+                             options || this.getQueryOptions());
+
+    {
+        const session = this.getDB().getSession();
+
+        const readPreference = session._getSessionAwareClient().getReadPreference(session);
+        if (readPreference !== null) {
+            cursor.readPref(readPreference.mode, readPreference.tags);
+        }
+
+        const client = session._getSessionAwareClient();
+        const readConcern = client.getReadConcern(session);
+        if (readConcern !== null &&
+            client.canUseReadConcern(session, cursor._convertToCommand(true))) {
+            cursor.readConcern(readConcern.level);
+        }
+    }
+
+    return cursor;
+}
+> db.samples1.find()
+{ "_id" : ObjectId("6622277f0216f911e859d098"), "name" : "nafiya" }
+{ "_id" : ObjectId("6622283b0216f911e859d099"), "name" : "ajisa" }
+{ "_id" : ObjectId("662228640216f911e859d09a"), "name" : "fida" }
+{ "_id" : ObjectId("662228bb0216f911e859d09b"), "name" : "lubna" }
+{ "_id" : ObjectId("662228c30216f911e859d09c"), "name" : "anagha" }
+{ "_id" : ObjectId("662228e90216f911e859d09d"), "name" : "najiya" }
+{ "_id" : ObjectId("662228f80216f911e859d09e"), "name" : "niba" }
+{ "_id" : ObjectId("662229000216f911e859d09f"), "name" : "kavya" }
+{ "_id" : ObjectId("662229230216f911e859d0a0"), "name" : "hari" }
+{ "_id" : ObjectId("6622292e0216f911e859d0a1"), "name" : "hena" }
+{ "_id" : ObjectId("66222aaf0216f911e859d0a2"), "name" : "renna", "age" : 20 }
+{ "_id" : ObjectId("66222ac60216f911e859d0a3"), "name" : "raha", "age" : 22 }
+{ "_id" : ObjectId("66222ae70216f911e859d0a4"), "name" : "anu", "age" : 23 }
+{ "_id" : ObjectId("66222af90216f911e859d0a5"), "name" : "hari", "age" : 27 }
+{ "_id" : ObjectId("66222b270216f911e859d0a6"), "name" : "gopi", "age" : 26 }
+> db.samples1.find().pretty()
+{ "_id" : ObjectId("6622277f0216f911e859d098"), "name" : "nafiya" }
+{ "_id" : ObjectId("6622283b0216f911e859d099"), "name" : "ajisa" }
+{ "_id" : ObjectId("662228640216f911e859d09a"), "name" : "fida" }
+{ "_id" : ObjectId("662228bb0216f911e859d09b"), "name" : "lubna" }
+{ "_id" : ObjectId("662228c30216f911e859d09c"), "name" : "anagha" }
+{ "_id" : ObjectId("662228e90216f911e859d09d"), "name" : "najiya" }
+{ "_id" : ObjectId("662228f80216f911e859d09e"), "name" : "niba" }
+{ "_id" : ObjectId("662229000216f911e859d09f"), "name" : "kavya" }
+{ "_id" : ObjectId("662229230216f911e859d0a0"), "name" : "hari" }
+{ "_id" : ObjectId("6622292e0216f911e859d0a1"), "name" : "hena" }
+{
+        "_id" : ObjectId("66222aaf0216f911e859d0a2"),
+        "name" : "renna",
+        "age" : 20
+}
+{
+        "_id" : ObjectId("66222ac60216f911e859d0a3"),
+        "name" : "raha",
+        "age" : 22
+}
+{ "_id" : ObjectId("66222ae70216f911e859d0a4"), "name" : "anu", "age" : 23 }
+{
+        "_id" : ObjectId("66222af90216f911e859d0a5"),
+        "name" : "hari",
+        "age" : 27
+}
+{
+        "_id" : ObjectId("66222b270216f911e859d0a6"),
+        "name" : "gopi",
+        "age" : 26
+}
+> db.samples1.find({age:{$gt:20}}).pretty()
+{
+        "_id" : ObjectId("66222ac60216f911e859d0a3"),
+        "name" : "raha",
+        "age" : 22
+}
+{ "_id" : ObjectId("66222ae70216f911e859d0a4"), "name" : "anu", "age" : 23 }
+{
+        "_id" : ObjectId("66222af90216f911e859d0a5"),
+        "name" : "hari",
+        "age" : 27
+}
+{
+        "_id" : ObjectId("66222b270216f911e859d0a6"),
+        "name" : "gopi",
+        "age" : 26
+}
+> db.sampes1.find({age:{$lt:22}}).pretty()
+> db.sampes1.find({age:{$lt:27}}).pretty()
+> db.samples1.find({age:{$lt:27}}).pretty()
+{
+        "_id" : ObjectId("66222aaf0216f911e859d0a2"),
+        "name" : "renna",
+        "age" : 20
+}
+{
+        "_id" : ObjectId("66222ac60216f911e859d0a3"),
+        "name" : "raha",
+        "age" : 22
+}
+{ "_id" : ObjectId("66222ae70216f911e859d0a4"), "name" : "anu", "age" : 23 }
+{
+        "_id" : ObjectId("66222b270216f911e859d0a6"),
+        "name" : "gopi",
+        "age" : 26
+}
+> db.samples1.find({age:{$lte:27}}).pretty()
+{
+        "_id" : ObjectId("66222aaf0216f911e859d0a2"),
+        "name" : "renna",
+        "age" : 20
+}
+{
+        "_id" : ObjectId("66222ac60216f911e859d0a3"),
+        "name" : "raha",
+        "age" : 22
+}
+{ "_id" : ObjectId("66222ae70216f911e859d0a4"), "name" : "anu", "age" : 23 }
+{
+        "_id" : ObjectId("66222af90216f911e859d0a5"),
+        "name" : "hari",
+        "age" : 27
+}
+{
+        "_id" : ObjectId("66222b270216f911e859d0a6"),
+        "name" : "gopi",
+        "age" : 26
+}
+> db.samples1.find({age:{$lte:20}}).pretty()
+{
+        "_id" : ObjectId("66222aaf0216f911e859d0a2"),
+        "name" : "renna",
+        "age" : 20
+}
+>
