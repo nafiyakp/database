@@ -184,3 +184,49 @@ function(query, fields, limit, skip, batchSize, options) {
         "age" : 20
 }
 >
+> db.samples1.distinct("name")
+[
+        "ajisa",
+        "anagha",
+        "anu",
+        "fida",
+        "gopi",
+        "hari",
+        "hena",
+        "kavya",
+        "lubna",
+        "nafiya",
+        "najiya",
+        "niba",
+        "raha",
+        "renna"
+]
+>
+> db.samples1.remove({name:"renna"})
+WriteResult({ "nRemoved" : 2 })
+> db.samples1.find().pretty()
+{ "_id" : ObjectId("6622277f0216f911e859d098"), "name" : "nafiya" }
+{ "_id" : ObjectId("6622283b0216f911e859d099"), "name" : "ajisa" }
+{ "_id" : ObjectId("662228bb0216f911e859d09b"), "name" : "lubna" }
+{ "_id" : ObjectId("662228c30216f911e859d09c"), "name" : "anagha" }
+{ "_id" : ObjectId("662228e90216f911e859d09d"), "name" : "najiya" }
+{ "_id" : ObjectId("662228f80216f911e859d09e"), "name" : "niba" }
+{ "_id" : ObjectId("662229000216f911e859d09f"), "name" : "kavya" }
+{ "_id" : ObjectId("662229230216f911e859d0a0"), "name" : "hari" }
+{ "_id" : ObjectId("6622292e0216f911e859d0a1"), "name" : "hena" }
+{
+        "_id" : ObjectId("66222ac60216f911e859d0a3"),
+        "name" : "raha",
+        "age" : 22
+}
+{ "_id" : ObjectId("66222ae70216f911e859d0a4"), "name" : "anu", "age" : 23 }
+{
+        "_id" : ObjectId("66222af90216f911e859d0a5"),
+        "name" : "hari",
+        "age" : 27
+}
+{
+        "_id" : ObjectId("66222b270216f911e859d0a6"),
+        "name" : "gopi",
+        "age" : 26
+}
