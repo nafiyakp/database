@@ -1,0 +1,76 @@
+Microsoft Windows [Version 10.0.19045.4474]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\WINDOWS\system32>cd C:\Program Files\MongoDB\Server\5.0\bin
+
+C:\Program Files\MongoDB\Server\5.0\bin>mongo
+MongoDB shell version v5.0.6
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("a905fdc8-dafd-4f8a-8cba-8dabb2ad22f8") }
+MongoDB server version: 5.0.6
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting:
+        2024-06-12T07:34:18.299+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> db.createUser(
+... { user : "mca",
+... pwd : "123",
+... roles : [{ role : "userAdminAnyDatabase",db:"admin"
+...          }
+...          ]
+...         } )
+uncaught exception: Error: couldn't add user: User "mca@test" already exists :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+DB.prototype.createUser@src/mongo/shell/db.js:1367:11
+@(shell):1:1
+> db.createUser(
+... { user : "mca1",
+... pwd : "1234",
+... roles : [{ role : "userAdminAnyDatabase",db:"admin"
+...          }
+...          ]
+...         } )
+Successfully added user: {
+        "user" : "mca1",
+        "roles" : [
+                {
+                        "role" : "userAdminAnyDatabase",
+                        "db" : "admin"
+                }
+        ]
+}
+> db.createUser(
+... { user :"s2mca",
+... pwd : "abc",
+... roles : [{ role : "userAdmin",db:"student"
+...          }
+...          ]
+...         } )
+Successfully added user: {
+        "user" : "s2mca",
+        "roles" : [
+                {
+                        "role" : "userAdmin",
+                        "db" : "student"
+                }
+        ]
+}
+>
