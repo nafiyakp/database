@@ -1,0 +1,68 @@
+Microsoft Windows [Version 10.0.19045.4474]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\WINDOWS\system32>cd C:\Program Files\MongoDB\Server\5.0\bin
+
+C:\Program Files\MongoDB\Server\5.0\bin>mongo --port 27020
+MongoDB shell version v5.0.6
+connecting to: mongodb://127.0.0.1:27020/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("117a38ee-4b20-4526-b339-36c81241ffe1") }
+MongoDB server version: 5.0.6
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting:
+        2024-06-14T10:27:33.803+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+        2024-06-14T10:27:33.803+05:30: This server is bound to localhost. Remote systems will be unable to connect to this server. Start the server with --bind_ip <address> to specify which IP addresses it should serve responses from, or with --bind_ip_all to bind to all interfaces. If this behavior is desired, start the server with --bind_ip 127.0.0.1 to disable this warning
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+test:SECONDARY> rs.slaveOk()
+WARNING: slaveOk() is deprecated and may be removed in the next major release. Please use secondaryOk() instead.
+test:SECONDARY> use testdb
+switched to db testdb
+test:SECONDARY> show collections
+student
+test:SECONDARY> db.student.find()
+{ "_id" : ObjectId("666bdb56caeb83e91b38cf5f"), "name" : "primary" }
+test:SECONDARY> db.test.insert({name:"secondary"})
+WriteCommandError({
+        "topologyVersion" : {
+                "processId" : ObjectId("666bcdbc3c49e93551346982"),
+                "counter" : NumberLong(4)
+        },
+        "ok" : 0,
+        "errmsg" : "not master",
+        "code" : 10107,
+        "codeName" : "NotWritablePrimary",
+        "$clusterTime" : {
+                "clusterTime" : Timestamp(1718346499, 1),
+                "signature" : {
+                        "hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+                        "keyId" : NumberLong(0)
+                }
+        },
+        "operationTime" : Timestamp(1718346499, 1)
+})
+test:SECONDARY> db.student.find()_
+uncaught exception: SyntaxError: unexpected token: identifier :
+@(shell):1:17
+test:SECONDARY> db.student.find();
+{ "_id" : ObjectId("666bdb56caeb83e91b38cf5f"), "name" : "primary" }
+test:SECONDARY>
+
+
