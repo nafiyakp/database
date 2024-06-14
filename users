@@ -1,0 +1,287 @@
+Microsoft Windows [Version 10.0.19045.4474]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\WINDOWS\system32>cd C:\Program Files\MongoDB\Server\5.0\bin
+
+C:\Program Files\MongoDB\Server\5.0\bin>mongo
+MongoDB shell version v5.0.6
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("a905fdc8-dafd-4f8a-8cba-8dabb2ad22f8") }
+MongoDB server version: 5.0.6
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting:
+        2024-06-12T07:34:18.299+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> db.createUser(
+... { user : "mca",
+... pwd : "123",
+... roles : [{ role : "userAdminAnyDatabase",db:"admin"
+...          }
+...          ]
+...         } )
+uncaught exception: Error: couldn't add user: User "mca@test" already exists :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+DB.prototype.createUser@src/mongo/shell/db.js:1367:11
+@(shell):1:1
+> db.createUser(
+... { user : "mca1",
+... pwd : "1234",
+... roles : [{ role : "userAdminAnyDatabase",db:"admin"
+...          }
+...          ]
+...         } )
+Successfully added user: {
+        "user" : "mca1",
+        "roles" : [
+                {
+                        "role" : "userAdminAnyDatabase",
+                        "db" : "admin"
+                }
+        ]
+}
+> db.createUser(
+... { user :"s2mca",
+... pwd : "abc",
+... roles : [{ role : "userAdmin",db:"student"
+...          }
+...          ]
+...         } )
+Successfully added user: {
+        "user" : "s2mca",
+        "roles" : [
+                {
+                        "role" : "userAdmin",
+                        "db" : "student"
+                }
+        ]
+}
+> show dbs
+admin     0.000GB
+config    0.000GB
+local     0.000GB
+nafiyakp  0.000GB
+> db.createUser(
+... { user : "nafiya",
+... pwd : "12345",
+... roles : [{ role :"readWrite",db:"local",
+...            role : "read", db:"nafiyakp"
+...         }
+...         ]
+...       }  )
+Successfully added user: {
+        "user" : "nafiya",
+        "roles" : [
+                {
+                        "role" : "read",
+                        "db" : "nafiyakp"
+                }
+        ]
+}
+> show dbs
+admin     0.000GB
+config    0.000GB
+local     0.000GB
+nafiya    0.000GB
+nafiyakp  0.000GB
+nafiyaz   0.000GB
+> db.createUser(
+... { user : "nafiya",
+... pwd : "123456",
+... roles : [{ role : "read",db:"nafiya",
+...            role: "readWrite",db:"nafiyaz"
+...         }
+...         ]
+...       }  )
+uncaught exception: Error: couldn't add user: User "nafiya@test" already exists :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+DB.prototype.createUser@src/mongo/shell/db.js:1367:11
+@(shell):1:1
+> db.createUser(
+...  { user : "nafi",
+...  pwd : "123456",
+...  roles : [{ role : "read",db:"nafiya",
+...             role:  "readWrite",db:"nafiyaz"
+...          }
+...          ]
+...         } )
+Successfully added user: {
+        "user" : "nafi",
+        "roles" : [
+                {
+                        "role" : "readWrite",
+                        "db" : "nafiyaz"
+                }
+        ]
+}
+> db.getUsers;
+function(args) {
+    var cmdObj = {usersInfo: 1};
+    Object.extend(cmdObj, args);
+    var res = this.runCommand(cmdObj);
+    if (!res.ok) {
+        var authSchemaIncompatibleCode = 69;
+        if (res.code == authSchemaIncompatibleCode ||
+            (res.code == null && res.errmsg == "no such cmd: usersInfo")) {
+            // Working with 2.4 schema user data
+            return this.system.users.find({}).toArray();
+        }
+
+        throw _getErrorWithCode(res, res.errmsg);
+    }
+
+    return res.users;
+}
+> db.getUsers();
+[
+        {
+                "_id" : "test.mca",
+                "userId" : UUID("d6067241-41bd-47a1-8360-d9d97f0880b7"),
+                "user" : "mca",
+                "db" : "test",
+                "roles" : [
+                        {
+                                "role" : "userAdminAnyDatabase",
+                                "db" : "admin"
+                        }
+                ],
+                "mechanisms" : [
+                        "SCRAM-SHA-1",
+                        "SCRAM-SHA-256"
+                ]
+        },
+        {
+                "_id" : "test.mca1",
+                "userId" : UUID("43342312-13dd-42fa-82dc-56a4631af0aa"),
+                "user" : "mca1",
+                "db" : "test",
+                "roles" : [
+                        {
+                                "role" : "userAdminAnyDatabase",
+                                "db" : "admin"
+                        }
+                ],
+                "mechanisms" : [
+                        "SCRAM-SHA-1",
+                        "SCRAM-SHA-256"
+                ]
+        },
+        {
+                "_id" : "test.nafi",
+                "userId" : UUID("77c92bd8-8e9a-4e28-a188-12724a182b62"),
+                "user" : "nafi",
+                "db" : "test",
+                "roles" : [
+                        {
+                                "role" : "readWrite",
+                                "db" : "nafiyaz"
+                        }
+                ],
+                "mechanisms" : [
+                        "SCRAM-SHA-1",
+                        "SCRAM-SHA-256"
+                ]
+        },
+        {
+                "_id" : "test.nafiya",
+                "userId" : UUID("4efef0cc-db3a-472b-96b4-0ae5e591d521"),
+                "user" : "nafiya",
+                "db" : "test",
+                "roles" : [
+                        {
+                                "role" : "read",
+                                "db" : "nafiyakp"
+                        }
+                ],
+                "mechanisms" : [
+                        "SCRAM-SHA-1",
+                        "SCRAM-SHA-256"
+                ]
+        },
+        {
+                "_id" : "test.s2mca",
+                "userId" : UUID("85002fcf-0dce-4b2c-bdd7-749ed06d6852"),
+                "user" : "s2mca",
+                "db" : "test",
+                "roles" : [
+                        {
+                                "role" : "userAdmin",
+                                "db" : "student"
+                        }
+                ],
+                "mechanisms" : [
+                        "SCRAM-SHA-1",
+                        "SCRAM-SHA-256"
+                ]
+        }
+]
+> db.getUsers ("nafi";
+... db.getUsers();
+... db.getUsers;
+...
+...
+> db.getUsers("nafi");
+uncaught exception: Error: no such command: '0' :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+DB.prototype.getUsers@src/mongo/shell/db.js:1640:15
+@(shell):1:1
+> db.getUsers("nafi");
+uncaught exception: Error: no such command: '0' :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+DB.prototype.getUsers@src/mongo/shell/db.js:1640:15
+@(shell):1:1
+> db.getUsers("nafi")
+uncaught exception: Error: no such command: '0' :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+DB.prototype.getUsers@src/mongo/shell/db.js:1640:15
+@(shell):1:1
+> db.getUser("nafi")
+{
+        "_id" : "test.nafi",
+        "userId" : UUID("77c92bd8-8e9a-4e28-a188-12724a182b62"),
+        "user" : "nafi",
+        "db" : "test",
+        "roles" : [
+                {
+                        "role" : "readWrite",
+                        "db" : "nafiyaz"
+                }
+        ],
+        "mechanisms" : [
+                "SCRAM-SHA-1",
+                "SCRAM-SHA-256"
+        ]
+}
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
