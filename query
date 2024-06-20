@@ -1,0 +1,80 @@
+mysql> use nafiya
+Database changed
+mysql>  create table customer(id int,name varchar(20),country varchar(20),address varchar(20),city varchar(20));
+Query OK, 0 rows affected (0.27 sec)
+
+mysql> insert into customer values(1,"anu","india","kattangal","kottayam");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into customer values(2,"nafiya","india","manchery","calicut");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into customer values(3,"kavya","india","mukkam","calicut");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into customer values(4,"anamika","india","abcd","kannur");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into customer values(5,"fida","india","narikuni","calicut");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into customer values(6,"manjima","india","varkala","palakad");
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from customer;
++------+---------+---------+-----------+----------+
+| id   | name    | country | address   | city     |
++------+---------+---------+-----------+----------+
+|    1 | anu     | india   | kattangal | kottayam |
+|    2 | nafiya  | india   | manchery  | calicut  |
+|    3 | kavya   | india   | mukkam    | calicut  |
+|    4 | anamika | india   | abcd      | kannur   |
+|    5 | fida    | india   | narikuni  | calicut  |
+|    6 | manjima | india   | varkala   | palakad  |
++------+---------+---------+-----------+----------+
+6 rows in set (0.00 sec)
+ DELIMITER  //
+mysql>  DELIMITER $$
+mysql>  CREATE PROCEDURE GETCustomersByCountry(IN countryname varchar(20))
+    ->  BEGIN
+    -> SELECT name from customer WHERE Country=countryname;
+    -> END$$
+Qmysql>  DELIMITER $$
+mysql>  CREATE PROCEDURE GETCustomersByCountrys(IN country_name varchar(20))
+    ->  BEGIN
+    -> SELECT name from customer WHERE Country=country_name;
+    -> END$$
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CALL GetcustomerByCountrys('india');
+    -> select * from customer;
+    -> $$
+ERROR 1305 (42000): PROCEDURE nafiya.GetcustomerByCountrys does not exist
+mysql>  CALL GetcustomersByCountrys('india');
+    ->  select * from customer;
+    ->  $$
++---------+
+| name    |
++---------+
+| anu     |
+| nafiya  |
+| kavya   |
+| anamika |
+| fida    |
+| manjima |
++---------+
+6 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
++------+---------+---------+-----------+----------+
+| id   | name    | country | address   | city     |
++------+---------+---------+-----------+----------+
+|    1 | anu     | india   | kattangal | kottayam |
+|    2 | nafiya  | india   | manchery  | calicut  |
+|    3 | kavya   | india   | mukkam    | calicut  |
+|    4 | anamika | india   | abcd      | kannur   |
+|    5 | fida    | india   | narikuni  | calicut  |
+|    6 | manjima | india   | varkala   | palakad  |
++------+---------+---------+-----------+----------+
+6 rows in set (0.01 sec)uery OK, 0 rows affected (0.03 sec)
