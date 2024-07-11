@@ -1,0 +1,24 @@
+DELIMITER //
+mysql> create function totalcust() returns float(26,2)
+    -> deterministic
+    -> begin
+    -> declare totalcust float(26,2);
+    -> select count(*) into totalcust from customer;
+    -> return totalcust;
+    -> end;
+    -> //
+Query OK, 0 rows affected, 2 warnings (0.04 sec)
+
+mysql> select totalcust;
+    -> //
+ERROR 1054 (42S22): Unknown column 'totalcust' in 'field list'
+mysql> select totalcust();
+    -> //
++-------------+
+| totalcust() |
++-------------+
+|        2.00 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql>
